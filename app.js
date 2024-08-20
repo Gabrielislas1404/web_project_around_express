@@ -1,13 +1,18 @@
 const express = require("express");
 
 const app = express();
-
 const { PORT = 3000 } = process.env;
 
-app.get("/", (req, res) => {
-  res.send("Hola mundo!");
+const usersRouter = require("./routes/users");
+const cardsRouter = require("./routes/cards");
+
+app.use("/users", usersRouter);
+app.use("/cards", cardsRouter);
+
+app.use((req, res) => {
+  res.status(400).json({ message: "Recurso solicitado no encontrado" });
 });
 
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+  console.log(`El servidor está corriendo en http://localhost:${PORT}`);
 });
