@@ -15,7 +15,7 @@ const cardSchema = new mongoose.Schema({
         v
       );
     },
-    message: (props) => `${props.value} no es un URL válido!`,
+    message: (props) => `${props.value} is not a valid URL!`,
   },
   owner: {
     type: [mongoose.Schema.Types.ObjectId],
