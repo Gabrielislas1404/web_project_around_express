@@ -36,4 +36,46 @@ const createUser = async (req, res) => {
   }
 };
 
-module.exports = { getUsers, getUserById, createUser };
+const updateProfile = async (req, res) => {
+  try {
+    const { name, about } = req.body;
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user._id,
+      { name, about },
+      { new: true, runValidators: true }
+    ).orFail(() => {
+      const error = new Error("It is not possible to update the Profile");
+      error.statusCode = 404;
+      throw error;
+    });
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const updateAvatar = async (req, res) => {
+  try {
+    const { avatar } = req.body;
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user._id,
+      { avatar },
+      { new: true, runValidators: true }
+    ).orFail(() => {
+      const error = new Error("It is not possible to update the Avatar");
+      error.statusCode = 404;
+      throw error;
+    });
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = {
+  getUsers,
+  getUserById,
+  createUser,
+  updateProfile,
+  updateAvatar,
+};
