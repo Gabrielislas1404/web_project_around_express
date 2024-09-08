@@ -6,7 +6,7 @@
 
 Para ejecutar el proyecto se necesita tener Node.js instalado.
 
-La base de datos es manejada con MongoDB
+Se utiliza mongoose para interactuar con la base de datos, la cual es manejada con MongoDB.
 
 En el desarrollo de este proyecto se creará un servidor con una API REST para poder gestionar datos de usuarios e imágenes.
 
