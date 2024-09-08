@@ -2,7 +2,7 @@
 
 💻 💻 💻
 
-### Este proyecto comprende el sprint 13 en el bootcamp de desarrollo web en "Tripleten". Realizado con Node.js y Express.
+### Este proyecto comprende el sprint 13 y 14 en el bootcamp de desarrollo web en "Tripleten". Realizado con Node.js y Express.
 
 Para ejecutar el proyecto se necesita tener Node.js instalado.
 

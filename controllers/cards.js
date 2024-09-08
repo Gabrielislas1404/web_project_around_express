@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const Card = require("../models/card");
 
 const getCards = async (req, res) => {
@@ -31,10 +32,42 @@ const deleteCard = async (req, res) => {
     if (!card) {
       return res.status(400).json({ message: "Card not found" });
     }
-    res.status(200).json({ message: "card deleted" });
+    res.status(200).json({ message: "Card deleted" });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
 
-module.exports = { getCards, createCard, deleteCard };
+const likeCard = async (req, res) => {
+  try {
+    const card = await Card.findByIdAndUpdate(
+      req.params.cardId,
+      { $addToSet: { likes: req.user._id } },
+      { new: true }
+    );
+    if (!card) {
+      return res.status(404).json({ message: "Card not found" });
+    }
+    res.status(200).json(card);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const dislikeCard = async (req, res) => {
+  try {
+    const card = await Card.findByIdAndUpdate(
+      req.params.cardId,
+      { $pull: { likes: req.user._id } },
+      { new: true }
+    );
+    if (!card) {
+      return res.status(404).json({ message: "Card not found" });
+    }
+    res.status(200).json(card);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+module.exports = { getCards, createCard, deleteCard, likeCard, dislikeCard };

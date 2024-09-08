@@ -13,7 +13,6 @@ mongoose
 const usersRouter = require("./routes/users");
 const cardsRouter = require("./routes/cards");
 
-// Middleware para parsear JSON
 app.use(express.json());
 
 app.use((req, res, next) => {
